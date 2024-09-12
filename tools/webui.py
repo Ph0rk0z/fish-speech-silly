@@ -371,7 +371,7 @@ def build_app():
                 with gr.Row():
                     if_refine_text = gr.Checkbox(
                         label=i18n("Text Normalization"),
-                        value=True,
+                        value=False,
                         scale=1,
                     )
 
@@ -576,7 +576,7 @@ def parse_args():
     parser.add_argument("--half", action="store_true")
     parser.add_argument("--compile", action="store_true")
     parser.add_argument("--max-gradio-length", type=int, default=0)
-    parser.add_argument("--theme", type=str, default="light")
+    parser.add_argument("--theme", type=str, default="dark")
 
     return parser.parse_args()
 
@@ -620,4 +620,4 @@ if __name__ == "__main__":
     logger.info("Warming up done, launching the web UI...")
 
     app = build_app()
-    app.launch(show_api=True)
+    app.launch(show_api=True, server_name="0.0.0.0")

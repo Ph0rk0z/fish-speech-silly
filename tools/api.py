@@ -79,7 +79,8 @@ async def other_exception_handler(exc: "Exception"):
 
 
 def load_audio(reference_audio, sr):
-    if len(reference_audio) > 255 or not Path(reference_audio).exists():
+   # if len(reference_audio) > 255 or not Path(reference_audio).exists():
+    if len(str(reference_audio)) > 255 or not Path(reference_audio).exists():
         try:
             audio_data = base64.b64decode(reference_audio)
             reference_audio = io.BytesIO(audio_data)
