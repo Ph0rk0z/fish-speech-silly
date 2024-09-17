@@ -15,7 +15,7 @@ Inference support command line, HTTP API and web UI.
 Download the required `vqgan` and `llama` models from our Hugging Face repository.
 
 ```bash
-huggingface-cli download fishaudio/fish-speech-1.2-sft --local-dir checkpoints/fish-speech-1.2-sft
+huggingface-cli download fishaudio/fish-speech-1.4 --local-dir checkpoints/fish-speech-1.4
 ```
 
 ### 1. Generate prompt from voice:
@@ -26,7 +26,7 @@ huggingface-cli download fishaudio/fish-speech-1.2-sft --local-dir checkpoints/f
 ```bash
 python tools/vqgan/inference.py \
     -i "paimon.wav" \
-    --checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth"
+    --checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth"
 ```
 
 You should get a `fake.npy` file.
@@ -38,7 +38,7 @@ python tools/llama/generate.py \
     --text "The text you want to convert" \
     --prompt-text "Your reference text" \
     --prompt-tokens "fake.npy" \
-    --checkpoint-path "checkpoints/fish-speech-1.2-sft" \
+    --checkpoint-path "checkpoints/fish-speech-1.4" \
     --num-samples 2 \
     --compile
 ```
@@ -59,7 +59,7 @@ This command will create a `codes_N` file in the working directory, where N is a
 ```bash
 python tools/vqgan/inference.py \
     -i "codes_0.npy" \
-    --checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth"
+    --checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth"
 ```
 
 ## HTTP API Inference
@@ -69,8 +69,8 @@ We provide a HTTP API for inference. You can use the following command to start 
 ```bash
 python -m tools.api \
     --listen 0.0.0.0:8080 \
-    --llama-checkpoint-path "checkpoints/fish-speech-1.2-sft" \
-    --decoder-checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth" \
+    --llama-checkpoint-path "checkpoints/fish-speech-1.4" \
+    --decoder-checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth" \
     --decoder-config-name firefly_gan_vq
 ```
 
@@ -90,51 +90,22 @@ python -m tools.post_api \
 
 The above command indicates synthesizing the desired audio according to the reference audio information and returning it in a streaming manner.
 
-If you need to randomly select reference audio based on `{SPEAKER}` and `{EMOTION}`, configure it according to the following steps:
-
-### 1. Create a `ref_data` folder in the root directory of the project.
-
-### 2. Create a directory structure similar to the following within the `ref_data` folder.
-
-```
-.
-├── SPEAKER1
-│    ├──EMOTION1
-│    │    ├── 21.15-26.44.lab
-│    │    ├── 21.15-26.44.wav
-│    │    ├── 27.51-29.98.lab
-│    │    ├── 27.51-29.98.wav
-│    │    ├── 30.1-32.71.lab
-│    │    └── 30.1-32.71.flac
-│    └──EMOTION2
-│         ├── 30.1-32.71.lab
-│         └── 30.1-32.71.mp3
-└── SPEAKER2
-    └─── EMOTION3
-          ├── 30.1-32.71.lab
-          └── 30.1-32.71.mp3
-```
-
-That is, first place `{SPEAKER}` folders in `ref_data`, then place `{EMOTION}` folders under each speaker, and place any number of `audio-text pairs` under each emotion folder.
-
-### 3. Enter the following command in the virtual environment
-
-```bash
-python tools/gen_ref.py
-
-```
-
-### 4. Call the API.
+The following example demonstrates that you can use **multiple** reference audio paths and reference audio texts at once. Separate them with spaces in the command.
 
 ```bash
 python -m tools.post_api \
-    --text "Text to be input" \
-    --speaker "${SPEAKER1}" \
-    --emotion "${EMOTION1}" \
-    --streaming True
+    --text "Text to input" \
+    --reference_audio "reference audio path1" "reference audio path2" \
+    --reference_text "reference audio text1" "reference audio text2"\
+    --streaming False \
+    --output "generated" \
+    --format "mp3"
 ```
 
-The above example is for testing purposes only.
+The above command synthesizes the desired `MP3` format audio based on the information from multiple reference audios and saves it as `generated.mp3` in the current directory.
+
+## GUI Inference 
+[Download client](https://github.com/AnyaCoder/fish-speech-gui/releases/tag/v0.1.0)
 
 ## WebUI Inference
 
@@ -142,8 +113,8 @@ You can start the WebUI using the following command:
 
 ```bash
 python -m tools.webui \
-    --llama-checkpoint-path "checkpoints/fish-speech-1.2-sft" \
-    --decoder-checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth" \
+    --llama-checkpoint-path "checkpoints/fish-speech-1.4" \
+    --decoder-checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth" \
     --decoder-config-name firefly_gan_vq
 ```
 

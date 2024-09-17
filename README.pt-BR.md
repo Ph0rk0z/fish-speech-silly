@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[Inglês](README.md) | [Chinês](README.zh.md) | **Português (Brasil)**
+[Inglês](README.md) | [Chinês](README.zh.md) | **Português (Brasil)** | [Japonês](README.ja.md)
 
 </div>
 
@@ -34,21 +34,23 @@ Não nos responsabilizamos por qualquer uso ilegal do código-fonte. Consulte as
 
 ## Vídeos
 
+#### 1.4 Introdução: https://www.bilibili.com/video/BV1pu46eVEk7
+
 #### 1.2 Introdução: https://www.bilibili.com/video/BV1wz421B71D
 
 #### 1.1 Apresentação Técnica: https://www.bilibili.com/video/BV1zJ4m1K7cj
 
 ## Documentação
 
-- [Inglês](https://speech.fish.audio/en/)
-- [Chinês](https://speech.fish.audio/)
+- [Inglês](https://speech.fish.audio/)
+- [Chinês](https://speech.fish.audio/zh/)
 - [Japonês](https://speech.fish.audio/ja/)
 - [Português (Brasil)](https://speech.fish.audio/pt/)
 
 ## Exemplos
 
-- [Inglês](https://speech.fish.audio/en/samples/)
-- [Chinês](https://speech.fish.audio/samples/)
+- [Inglês](https://speech.fish.audio/samples/)
+- [Chinês](https://speech.fish.audio/zh/samples/)
 - [Japonês](https://speech.fish.audio/ja/samples/)
 - [Português (Brasil)](https://speech.fish.audio/pt/samples/)
 

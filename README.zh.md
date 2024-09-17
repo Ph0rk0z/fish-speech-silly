@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[English](README.md) | **中文简体** | [Português (Brasil)](README.pt-BR.md)
+[English](README.md) | **中文简体** | [Português (Brasil)](README.pt-BR.md) | [日本語](README.ja.md)
 
 </div>
 
@@ -14,7 +14,7 @@
 <img alt="QQ" src="https://img.shields.io/badge/QQ Group-%2312B7F5?logo=tencent-qq&logoColor=white&style=flat-square"/>
 </a>
 <a target="_blank" href="https://hub.docker.com/r/lengyue233/fish-speech">
-<img alt="Docker" src="https://img.shields.io/docker/pulls/lengyue233/fish-speech?style=flat-square&logo=docker"/>
+<img alt="Docker" src="https://img.sh.io/docker/pulls/lengyue233/fish-speech?style=flat-square&logo=docker"/>
 </a>
 <a target="_blank" href="https://github.com/fishaudio/fish-speech/actions/workflows/build-windows-package.yml">
 <img alt="Action" src="https://img.shields.io/github/actions/workflow/status/fishaudio/fish-speech/build-windows-package.yml?style=flat-square&label=Build%20Windows%20Package&logo=github"/>
@@ -37,21 +37,23 @@
 
 ## 视频
 
+#### 1.4 介绍: https://www.bilibili.com/video/BV1pu46eVEk7
+
 #### 1.2 介绍: https://www.bilibili.com/video/BV1wz421B71D
 
-#### 1.1 技术介绍: https://www.bilibili.com/video/BV1zJ4m1K7cj
+#### 1.1 介绍: https://www.bilibili.com/video/BV1zJ4m1K7cj
 
 ## 文档
 
-- [English](https://speech.fish.audio/en/)
-- [中文](https://speech.fish.audio/)
+- [English](https://speech.fish.audio/)
+- [中文](https://speech.fish.audio/zh/)
 - [日本語](https://speech.fish.audio/ja/)
 - [Portuguese (Brazil)](https://speech.fish.audio/pt/)
 
 ## 例子
 
-- [English](https://speech.fish.audio/en/samples/)
-- [中文](https://speech.fish.audio/samples/)
+- [English](https://speech.fish.audio/samples/)
+- [中文](https://speech.fish.audio/zh/samples/)
 - [日本語](https://speech.fish.audio/ja/samples/)
 - [Portuguese (Brazil)](https://speech.fish.audio/pt/samples/)
 

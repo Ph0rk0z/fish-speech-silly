@@ -1,3 +1,4 @@
+.DS_Store
 .pgx.*
 .pdm-python
 /fish_speech.egg-info
@@ -14,6 +15,7 @@ filelists
 /*.npy
 /*.wav
 /*.mp3
+/*.lab
 /results
 /data
 /.idea
@@ -24,6 +26,6 @@ asr-label*
 /fishenv
 /.locale
 /demo-audios
-ref_data*
+/references
 /example
 /faster_whisper

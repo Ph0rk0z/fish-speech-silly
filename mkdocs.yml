@@ -59,16 +59,18 @@ plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
       lang:
-        - zh
         - en
+        - zh
+        - ja
+        - pt
   - i18n:
       docs_structure: folder
       languages:
         - locale: en
           name: English
+          default: true
           build: true
         - locale: zh
-          default: true
           name: 简体中文
           build: true
         - locale: ja

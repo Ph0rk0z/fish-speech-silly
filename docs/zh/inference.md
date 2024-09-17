@@ -15,13 +15,13 @@
 从我们的 huggingface 仓库下载所需的 `vqgan` 和 `llama` 模型。
 
 ```bash
-huggingface-cli download fishaudio/fish-speech-1.2-sft --local-dir checkpoints/fish-speech-1.2-sft
+huggingface-cli download fishaudio/fish-speech-1.4 --local-dir checkpoints/fish-speech-1.4
 ```
 
 对于中国大陆用户，可使用 mirror 下载。
 
 ```bash
-HF_ENDPOINT=https://hf-mirror.com huggingface-cli download fishaudio/fish-speech-1.2-sft --local-dir checkpoints/fish-speech-1.2-sft
+HF_ENDPOINT=https://hf-mirror.com huggingface-cli download fishaudio/fish-speech-1.4 --local-dir checkpoints/fish-speech-1.4
 ```
 
 ### 1. 从语音生成 prompt:
@@ -32,7 +32,7 @@ HF_ENDPOINT=https://hf-mirror.com huggingface-cli download fishaudio/fish-speech
 ```bash
 python tools/vqgan/inference.py \
     -i "paimon.wav" \
-    --checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth"
+    --checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth"
 ```
 
 你应该能得到一个 `fake.npy` 文件.
@@ -44,7 +44,7 @@ python tools/llama/generate.py \
     --text "要转换的文本" \
     --prompt-text "你的参考文本" \
     --prompt-tokens "fake.npy" \
-    --checkpoint-path "checkpoints/fish-speech-1.2-sft" \
+    --checkpoint-path "checkpoints/fish-speech-1.4" \
     --num-samples 2 \
     --compile
 ```
@@ -65,7 +65,7 @@ python tools/llama/generate.py \
 ```bash
 python tools/vqgan/inference.py \
     -i "codes_0.npy" \
-    --checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth"
+    --checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth"
 ```
 
 ## HTTP API 推理
@@ -75,8 +75,8 @@ python tools/vqgan/inference.py \
 ```bash
 python -m tools.api \
     --listen 0.0.0.0:8080 \
-    --llama-checkpoint-path "checkpoints/fish-speech-1.2-sft" \
-    --decoder-checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth" \
+    --llama-checkpoint-path "checkpoints/fish-speech-1.4" \
+    --decoder-checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth" \
     --decoder-config-name firefly_gan_vq
 ```
 如果你想要加速推理，可以加上`--compile`参数。
@@ -100,52 +100,22 @@ python -m tools.post_api \
 
 上面的命令表示按照参考音频的信息，合成所需的音频并流式返回.
 
-如果需要通过`{说话人}`和`{情绪}`随机选择参考音频，那么就根据下列步骤配置：
-
-### 1. 在项目根目录创建`ref_data`文件夹.
-
-### 2. 在`ref_data`文件夹内创建类似如下结构的目录.
-
-```
-.
-├── SPEAKER1
-│    ├──EMOTION1
-│    │    ├── 21.15-26.44.lab
-│    │    ├── 21.15-26.44.wav
-│    │    ├── 27.51-29.98.lab
-│    │    ├── 27.51-29.98.wav
-│    │    ├── 30.1-32.71.lab
-│    │    └── 30.1-32.71.flac
-│    └──EMOTION2
-│         ├── 30.1-32.71.lab
-│         └── 30.1-32.71.mp3
-└── SPEAKER2
-    └─── EMOTION3
-          ├── 30.1-32.71.lab
-          └── 30.1-32.71.mp3
-```
-
-也就是`ref_data`里先放`{说话人}`文件夹, 每个说话人下再放`{情绪}`文件夹, 每个情绪文件夹下放任意个`音频-文本对`。
-
-### 3. 在虚拟环境里输入
-
-```bash
-python tools/gen_ref.py
-```
-
-生成参考目录.
-
-### 4. 调用 api.
+下面的示例展示了， 可以一次使用**多个** `参考音频路径` 和 `参考音频的文本内容`。在命令里用空格隔开即可。 
 
 ```bash
 python -m tools.post_api \
     --text "要输入的文本" \
-    --speaker "说话人1" \
-    --emotion "情绪1" \
-    --streaming True
+    --reference_audio "参考音频路径1" "参考音频路径2" \
+    --reference_text "参考音频的文本内容1" "参考音频的文本内容2"\
+    --streaming False \
+    --output "generated" \
+    --format "mp3"
 ```
 
-以上示例仅供测试.
+上面的命令表示按照多个参考音频的信息，合成所需的`MP3`格式音频，并保存为当前目录的`generated.mp3`文件。
+
+## GUI 推理 
+[下载客户端](https://github.com/AnyaCoder/fish-speech-gui/releases/tag/v0.1.0)
 
 ## WebUI 推理
 
@@ -153,8 +123,8 @@ python -m tools.post_api \
 
 ```bash
 python -m tools.webui \
-    --llama-checkpoint-path "checkpoints/fish-speech-1.2-sft" \
-    --decoder-checkpoint-path "checkpoints/fish-speech-1.2-sft/firefly-gan-vq-fsq-4x1024-42hz-generator.pth" \
+    --llama-checkpoint-path "checkpoints/fish-speech-1.4" \
+    --decoder-checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth" \
     --decoder-config-name firefly_gan_vq
 ```
 
