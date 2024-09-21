@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**English** | [简体中文](README.zh.md) | [Portuguese](README.pt-BR.md) | [日本語](README.ja.md)
+**English** 
 
 </div>
 
@@ -25,58 +25,43 @@
 
 This codebase and all models are released under CC-BY-NC-SA-4.0 License. Please refer to [LICENSE](LICENSE) for more details.
 
-## Disclaimer
+## Info
 
-We do not hold any responsibility for any illegal usage of the codebase. Please refer to your local laws about DMCA and other related laws.
+This is fish speech for silly tavern. My crude implementation.
 
-## Online Demo
 
-[Fish Audio](https://fish.audio)
+First pre-process your wavs with their tool. Then edit the fishtts.js for speaker names and your server IP.
+The files are in SillyTavern/public/scripts/extensions/tts/
 
-## Quick Start for Local Inference
 
-[inference.ipynb](/inference.ipynb)
 
-## Videos
+I have included styletts support too because I don't feel like editing the index to remove it.
+https://github.com/longtimegone/StyleTTS2-Sillytavern-api
 
-#### V1.4 Demo Video: [Youtube](https://www.youtube.com/watch?v=Ghc8cJdQyKQ)
 
-## Documents
+An example on how to start the server:
 
-- [English](https://speech.fish.audio/)
-- [中文](https://speech.fish.audio/zh/)
-- [日本語](https://speech.fish.audio/ja/)
-- [Portuguese (Brazil)](https://speech.fish.audio/pt/)
+<pre>
+CUDA_VISIBLE_DEVICES=3 python api_json.py \
+    --listen 0.0.0.0:8000 \
+    --llama-checkpoint-path "checkpoints/fish-speech-1.4" \
+    --decoder-checkpoint-path "checkpoints/fish-speech-1.4/firefly-gan-vq-fsq-8x1024-21hz-generator.pth" \
+    --decoder-config-name firefly_gan_vq \
+    --half \
+    --compile
+</pre>
 
-## Samples
+You can do so from the tools folder. No need to install it. Just have all the dependencies in your conda environment.
+May however have to install the audio pre-processor.
 
-- [English](https://speech.fish.audio/samples/)
-- [中文](https://speech.fish.audio/zh/samples/)
-- [日本語](https://speech.fish.audio/ja/samples/)
-- [Portuguese (Brazil)](https://speech.fish.audio/pt/samples/)
 
-## Credits
+Windows peeps, I'm sorry. Can't help you. 
 
-- [VITS2 (daniilrobnikov)](https://github.com/daniilrobnikov/vits2)
-- [Bert-VITS2](https://github.com/fishaudio/Bert-VITS2)
-- [GPT VITS](https://github.com/innnky/gpt-vits)
-- [MQTTS](https://github.com/b04901014/MQTTS)
-- [GPT Fast](https://github.com/pytorch-labs/gpt-fast)
-- [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)
 
-## Sponsor
 
-<div>
-  <a href="https://6block.com/">
-    <img src="https://avatars.githubusercontent.com/u/60573493" width="100" height="100" alt="6Block Avatar"/>
-  </a>
-  <br>
-  <a href="https://6block.com/">Data Processing sponsor by 6Block</a>
-</div>
-<div>
-  <a href="https://www.lepton.ai/">
-    <img src="https://www.lepton.ai/favicons/apple-touch-icon.png" width="100" height="100" alt="Lepton Avatar"/>
-  </a>
-  <br>
-  <a href="https://www.lepton.ai/">Fish Audio is served on Lepton.AI</a>
-</div>
+
+
+
+
+
+
