@@ -96,7 +96,7 @@ def load_audio(reference_audio, sr):
             raise ValueError("Invalid path or base64 string")
 
     waveform, original_sr = torchaudio.load(
-        reference_audio, backend="soundfile" if sys.platform == "linux" else "soundfile"
+        reference_audio, backend="ffmpeg" if sys.platform == "linux" else "soundfile"
     )
 
     if waveform.shape[0] > 1:
