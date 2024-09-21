@@ -27,11 +27,21 @@ This codebase and all models are released under CC-BY-NC-SA-4.0 License. Please 
 
 ## Info
 
+![plugin](https://github.com/user-attachments/assets/e80c7736-3693-4fdf-b60f-5e9bd6b40c5d)
+
+
 This is fish speech for silly tavern. My crude implementation.
 
 
 First pre-process your wavs with their tool. Then edit the fishtts.js for speaker names and your server IP.
 The files are in SillyTavern/public/scripts/extensions/tts/
+
+![references](https://github.com/user-attachments/assets/dcb43f19-4895-47f8-9634-4855de8f22e6)
+![single-speaker](https://github.com/user-attachments/assets/accac6f6-7395-4ff8-bd3b-aad7ce94cbd5)
+![folder](https://github.com/user-attachments/assets/f9a9e6a5-95e6-44f3-be0b-9d87c490e7b0)
+
+![fishtts-js](https://github.com/user-attachments/assets/864bbc8b-80f1-4e42-806f-31e8848df60b)
+
 
 
 
