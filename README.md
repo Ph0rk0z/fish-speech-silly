@@ -33,7 +33,8 @@ This codebase and all models are released under CC-BY-NC-SA-4.0 License. Please 
 This is fish speech for silly tavern. My crude implementation.
 
 
-First pre-process your wavs with their tool. Then edit the fishtts.js for speaker names and your server IP.
+First pre-process your wavs with their tool. https://github.com/fishaudio/audio-preprocess 
+Then edit the fishtts.js for speaker names and your server IP.
 The files are in SillyTavern/public/scripts/extensions/tts/
 
 ![references](https://github.com/user-attachments/assets/dcb43f19-4895-47f8-9634-4855de8f22e6)
