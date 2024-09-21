@@ -14,7 +14,7 @@ threshold = 10 ** (-50 / 20.0)
 
 
 def process(file):
-    waveform, sample_rate = torchaudio.load(str(file), backend="sox")
+    waveform, sample_rate = torchaudio.load(str(file), backend="soundfile")
     if waveform.size(0) > 1:
         waveform = waveform.mean(dim=0, keepdim=True)
 
